@@ -1,0 +1,109 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the wrapper and container */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 960px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the text box */
+.box {
+    flex: 1;
+    padding: 20px;
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.letter-display {
+    font-size: 5rem; /* Adjust the font size as needed */
+    margin-bottom: 20px;
+}
+
+/* Styling for the video box */
+.video-box {
+    max-width: 50%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Styling for the panel */
+.panel {
+    max-width: 500px;
+    width: 80%;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.panel h2 {
+    margin-bottom: 10px;
+}
+
+.panel form {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel label {
+    margin-bottom: 5px;
+}
+
+.panel textarea {
+    resize: vertical;
+}
+
+.panel button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.panel button:hover {
+    background-color: #0056b3;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+
+    .video-box {
+        max-width: 100%; /* Ensure video box takes full width on smaller screens */
+    }
+
+    .letter-display {
+        font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+}

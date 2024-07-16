@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Learning</title>
+    <link rel="stylesheet" href="./CSS/Style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="box text-box">
+                <div class="letter-display">
+                    <p id="letter">A</p>
+                </div>
+                <p id="sentence"></p>
+            </div>
+            <div class="box video-box">
+                <video id="video" src="" controls style="max-width: 100%; height: auto;"></video>
+            </div>
+        </div>
+        <div class="panel">
+            <h2>Edit Sentences</h2>
+            <form id="sentenceForm">
+                <label for="char">Character:</label>
+                <input type="text" id="char" name="char" maxlength="1" required><br><br>
+                <label for="sentence">Sentence:</label><br>
+                <textarea id="sentence" name="sentence" rows="4" cols="50" required></textarea><br><br>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Panel for editing sentences -->
+    
+
+    <script src="./JS/Script.js"></script>
+</body>
+</html>
