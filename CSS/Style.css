@@ -1,14 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+
 /* Reset default margins and paddings */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ 
 }
 
+body{
+
+
+    background-color: #f0f0f0;
+}
 /* Basic styling for the wrapper and container */
 .wrapper {
+    margin: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
@@ -42,8 +51,17 @@
 }
 
 .letter-display {
-    font-size: 5rem; /* Adjust the font size as needed */
+    font-size: 7rem; /* Adjust the font size as needed */
     margin-bottom: 20px;
+    font-family: "Carter One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#sentenceshow {
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Styling for the video box */
@@ -55,9 +73,9 @@
 
 /* Styling for the panel */
 .panel {
-    max-width: 500px;
-    width: 80%;
-    margin-top: 20px;
+    max-width: 660px;
+    width: 100%;
+    margin-top: 10px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -70,18 +88,43 @@
 
 .panel form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* No wrapping to keep items in a single line */
 }
 
 .panel label {
     margin-bottom: 5px;
+    width: 100%; /* Ensure labels take full width */
+}
+
+.panel input[type="text"],
+.panel textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+}
+
+.panel input[type="text"]:focus,
+.panel textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+    outline: none;
 }
 
 .panel textarea {
     resize: vertical;
+    height: 40px; /* Reduced height */
 }
 
 .panel button {
+    margin-top: 20px;
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -89,11 +132,53 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    align-self: flex-start; /* Ensure button aligns at the start */
+    margin-left: 10px;
+    height: 40px; /* Reduced height */
 }
 
 .panel button:hover {
     background-color: #0056b3;
 }
+
+.panel .form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 10px; /* Add margin to the right of form groups */
+    max-width: calc(50% - 10px); /* Ensure form groups take half width minus margin */
+}
+
+
+/* Styling for the header */
+header {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-family: "Carter One", system-ui;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    background-color: #007bff;
+}
+
+/* Styling for the footer */
+footer {
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Stack items vertically on smaller screens */
@@ -105,5 +190,13 @@
 
     .letter-display {
         font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    footer p {
+        font-size: 0.875rem;
     }
 }

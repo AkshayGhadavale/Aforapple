@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let currentUtterance = null; // Variable to store the current utterance
+    let currentUtterance = null; // Variable to store the current sentnece 
 
     const sentences = loadSentencesFromStorage() || getDefaultSentences();
+
+    const colors = getColorMapping(); // Colors for aplhabeats
 
     const pexelsApiKey = 'o1TBu5lNZNZsBOfCgIQToXqvq4kSXq4s725oN2q3bXXH0m9sZugjX6mU';
     const pexelsApiUrl = 'https://api.pexels.com/videos/search';
@@ -18,7 +20,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function Playletter(e) {
+
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+            return;
+        }
+
+
         let char = '';
+        if (event.type === 'click' || event.type === 'touchstart') {
 
         switch(e.keyCode) {
             case 65: // 'A'
@@ -129,8 +138,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 char = '';
         }
 
+    }
         if (char) {
-            // Stop current speech if playing
+            // Stop speaking while
             if (currentUtterance) {
                 speechSynthesis.cancel();
             }
@@ -138,7 +148,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const sentence = sentences[char];
             show(char, sentence);
 
-            const keyword = sentence.split(' ')[2]; // Extract the keyword from the sentence
+            const keyword = sentence.split(' ')[2]; // get the keyword from the sentence
             fetchVideo(keyword).then(videoUrl => {
                 if (videoUrl) {
                     showVideo(videoUrl);
@@ -152,31 +162,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
+    //to dispay letter and senetnece
     function show(char, sentence) {
-        document.getElementById('letter').innerText = `${char} - ${sentence}`;
+        const letterElement = document.getElementById('letter');
+        letterElement.innerText = `${char}`;
+        letterElement.style.color = colors[char]; 
+        document.getElementById('sentenceshow').innerText = ` ${sentence}`;
     }
 
+//show video
     function showVideo(videoUrl) {
         const videoElement = document.getElementById('video');
         videoElement.src = videoUrl;
-        videoElement.autoplay = true; // Autoplay video
-        videoElement.muted = true; // Mute video
-        videoElement.loop = true; // Loop video
-        videoElement.controls = false; // Hide video controls
+        videoElement.autoplay = true; 
+        videoElement.muted = true; 
+        videoElement.loop = true; 
+        videoElement.controls = false; 
     }
+
+
+    //to speak
 
     function speakSentence(sentence) {
         const utterance = new SpeechSynthesisUtterance(sentence);
         speechSynthesis.speak(utterance);
-        currentUtterance = utterance; // Store the current utterance
+        currentUtterance = utterance; 
     }
 
-    // Save sentences to local storage
+    // Save local storage
     function saveSentencesToStorage(sentences) {
         localStorage.setItem('alphabet_sentences', JSON.stringify(sentences));
     }
 
-    // Load sentences from local storage
+    // Load from local storage
     function loadSentencesFromStorage() {
         const storedSentences = localStorage.getItem('alphabet_sentences');
         return storedSentences ? JSON.parse(storedSentences) : null;
@@ -214,15 +232,54 @@ document.addEventListener('DOMContentLoaded', (event) => {
         };
     }
 
+    function getColorMapping() {
+        return {
+            A: 'red',
+            B: 'blue',
+            C: 'green',
+            D: 'purple',
+            E: 'orange',
+            F: 'yellow',
+            G: 'pink',
+            H: 'brown',
+            I: 'cyan',
+            J: 'magenta',
+            K: 'lime',
+            L: 'teal',
+            M: 'navy',
+            N: 'olive',
+            O: 'maroon',
+            P: 'violet',
+            Q: 'gold',
+            R: 'silver',
+            S: 'coral',
+            T: 'indigo',
+            U: 'turquoise',
+            V: 'plum',
+            W: 'lavender',
+            X: 'salmon',
+            Y: 'khaki',
+            Z: 'peachpuff'
+        };
+    }
+
+
     // Function to handle form submission and update sentences
     const form = document.getElementById('sentenceForm');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const charInput = document.getElementById('char');
         const sentenceInput = document.getElementById('sentence');
+      
+        
+        if (!charInput || !sentenceInput) {
+            alert('Form elements are missing.');
+            return;
+        }
+    
         const char = charInput.value.toUpperCase();
         const sentence = sentenceInput.value.trim();
-
+    
         if (char && sentence) {
             sentences[char] = sentence;
             saveSentencesToStorage(sentences);
@@ -233,12 +290,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alert('Please fill out both fields.');
         }
     });
+    
 
-    // Add event listener to capture keypress events
+    //when key press 
     document.addEventListener('keypress', Playletter);
+    document.addEventListener('touchstart', Playletter);
 
-    // Add event listener to speak the sentence when the button is clicked
+    // speak the sentence
     function speak(sentence) {
         speakSentence(sentence);
     }
 });
+

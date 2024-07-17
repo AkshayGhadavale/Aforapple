@@ -7,32 +7,42 @@
     <link rel="stylesheet" href="./CSS/Style.css">
 </head>
 <body>
+    <header>
+        <h1>Alphabet Learning</h1>
+    </header>
+
     <div class="wrapper">
         <div class="container">
             <div class="box text-box">
                 <div class="letter-display">
-                    <p id="letter">A</p>
+                    <p id="letter"></p>
                 </div>
-                <p id="sentence"></p>
+                <p id="sentenceshow">Click Any Alphabet</p>
             </div>
             <div class="box video-box">
-                <video id="video" src="" controls style="max-width: 100%; height: auto;"></video>
+                <video id="video" src="./Videos/177698-858018240_small.mp4"  controls style="max-width: 100%; height: auto;"></video>
             </div>
         </div>
         <div class="panel">
             <h2>Edit Sentences</h2>
             <form id="sentenceForm">
-                <label for="char">Character:</label>
-                <input type="text" id="char" name="char" maxlength="1" required><br><br>
-                <label for="sentence">Sentence:</label><br>
-                <textarea id="sentence" name="sentence" rows="4" cols="50" required></textarea><br><br>
+                <div class="form-group">
+                    <label for="char">Character:</label>
+                    <input type="text" id="char" name="char" maxlength="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="sentence">Sentence:</label>
+                    <textarea id="sentence" name="sentence" rows="4" cols="20" required></textarea>
+                </div>
                 <button type="submit">Save</button>
             </form>
         </div>
+        
     </div>
 
-    <!-- Panel for editing sentences -->
-    
+    <footer>
+        <p>&copy; 2024 Alphabet Learning. All rights reserved.</p>
+    </footer>
 
     <script src="./JS/Script.js"></script>
 </body>
