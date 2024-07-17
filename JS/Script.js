@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    
     let currentUtterance = null; // Variable to store the current sentence
 
     const sentences = loadSentencesFromStorage() || getDefaultSentences();
@@ -28,11 +29,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const sentence = sentences[char];
             show(char, sentence);
 
-            const keyword = sentence.split(' ')[2]; // get the keyword from the sentence
+            const keyword = sentence; // get the keyword from the sentence
             fetchVideo(keyword).then(videoUrl => {
                 if (videoUrl) {
                     showVideo(videoUrl);
-                    speak(sentence);
+                    speak(char,sentence);
                 } else {
                     console.error('No video found for', keyword);
                 }
@@ -64,7 +65,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const letterElement = document.getElementById('letter');
         letterElement.innerText = `${char}`;
         letterElement.style.color = colors[char];
-        document.getElementById('sentenceshow').innerText = ` ${sentence}`;
+        // document.getElementById('sentenceshow').innerText = `${sentence}`;
+        document.getElementById('sentenceshow').innerText = `${char} For ${sentence}`;
     }
 
     function showVideo(videoUrl) {
@@ -93,32 +95,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function getDefaultSentences() {
         return {
-            A: 'A for Apple',
-            B: 'B for Ball',
-            C: 'C for Cat',
-            D: 'D for Dog',
-            E: 'E for Elephant',
-            F: 'F for Fish',
-            G: 'G for Goat',
-            H: 'H for Hat',
-            I: 'I for Icecream',
-            J: 'J for Jug',
-            K: 'K for Kite',
-            L: 'L for Lion',
-            M: 'M for Monkey',
-            N: 'N for Nest',
-            O: 'O for Orange',
-            P: 'P for Parrot',
-            Q: 'Q for Queen',
-            R: 'R for Rabbit',
-            S: 'S for Snake',
-            T: 'T for Tiger',
-            U: 'U for Umbrella',
-            V: 'V for Violin',
-            W: 'W for Watch',
-            X: 'X for Xylophone',
-            Y: 'Y for Yak',
-            Z: 'Z for Zebra'
+            A: 'Apple',
+            B: 'Ball',
+            C: 'Cat',
+            D: 'Dog',
+            E: 'Elephant',
+            F: 'Fish',
+            G: 'Goat',
+            H: 'Hat',
+            I: 'Icecream',
+            J: 'Jug',
+            K: 'Kite',
+            L: 'Lion',
+            M: 'Monkey',
+            N: 'Nest',
+            O: 'Orange',
+            P: 'Parrot',
+            Q: 'Queen',
+            R: 'Rabbit',
+            S: 'Snake',
+            T: 'Tiger',
+            U: 'Umbrella',
+            V: 'Violin',
+            W: 'Watch',
+            X: 'Xylophone',
+            Y: 'Yak',
+            Z: 'Zebra'
         };
     }
 
@@ -183,7 +185,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const mobileCharInput = document.getElementById('mobileChar');
     mobileCharInput.addEventListener('input', handleMobileInput);
 
-    function speak(sentence) {
-        speakSentence(sentence);
+    function speak(char,sentence) {
+        speakSentence(char+"  for "+sentence);
     }
 });
