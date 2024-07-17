@@ -175,9 +175,15 @@ footer {
     font-family: Arial, sans-serif;
 }
 
-footer p {
+footer p :first-child{
     font-size: 1rem;
+    width: 70%;
 }
+footer p :nth-child(2){
+    font-size: 1rem;
+    width: 70%;
+}
+
 
 @media (max-width: 768px) {
     .container {
@@ -198,5 +204,33 @@ footer p {
 
     footer p {
         font-size: 0.875rem;
+    }
+}
+
+
+/* Add this to your existing CSS */
+.mobile-input {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.mobile-input label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.mobile-input input {
+    padding: 10px;
+    font-size: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 80%;
+}
+
+@media (max-width: 768px) {
+    .mobile-input {
+        display: block; /* Show mobile input on smaller screens */
     }
 }

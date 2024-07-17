@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let currentUtterance = null; // Variable to store the current sentnece 
+    let currentUtterance = null; // Variable to store the current sentence
 
     const sentences = loadSentencesFromStorage() || getDefaultSentences();
 
-    const colors = getColorMapping(); // Colors for aplhabeats
+    const colors = getColorMapping(); // Colors for alphabets
 
     const pexelsApiKey = 'o1TBu5lNZNZsBOfCgIQToXqvq4kSXq4s725oN2q3bXXH0m9sZugjX6mU';
     const pexelsApiUrl = 'https://api.pexels.com/videos/search';
@@ -19,128 +19,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return data.videos.length ? data.videos[0].video_files[0].link : '';
     }
 
-    function Playletter(e) {
-
-        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-            return;
-        }
-
-
-        let char = '';
-        if (event.type === 'click' || event.type === 'touchstart') {
-
-        switch(e.keyCode) {
-            case 65: // 'A'
-            case 97: // 'a'
-                char = 'A';
-                break;
-            case 66: // 'B'
-            case 98: // 'b'
-                char = 'B';
-                break;
-            case 67: // 'C'
-            case 99: // 'c'
-                char = 'C';
-                break;
-            case 68: // 'D'
-            case 100: // 'd'
-                char = 'D';
-                break;
-            case 69: // 'E'
-            case 101: // 'e'
-                char = 'E';
-                break;
-            case 70: // 'F'
-            case 102: // 'f'
-                char = 'F';
-                break;
-            case 71: // 'G'
-            case 103: // 'g'
-                char = 'G';
-                break;
-            case 72: // 'H'
-            case 104: // 'h'
-                char = 'H';
-                break;
-            case 73: // 'I'
-            case 105: // 'i'
-                char = 'I';
-                break;
-            case 74: // 'J'
-            case 106: // 'j'
-                char = 'J';
-                break;
-            case 75: // 'K'
-            case 107: // 'k'
-                char = 'K';
-                break;
-            case 76: // 'L'
-            case 108: // 'l'
-                char = 'L';
-                break;
-            case 77: // 'M'
-            case 109: // 'm'
-                char = 'M';
-                break;
-            case 78: // 'N'
-            case 110: // 'n'
-                char = 'N';
-                break;
-            case 79: // 'O'
-            case 111: // 'o'
-                char = 'O';
-                break;
-            case 80: // 'P'
-            case 112: // 'p'
-                char = 'P';
-                break;
-            case 81: // 'Q'
-            case 113: // 'q'
-                char = 'Q';
-                break;
-            case 82: // 'R'
-            case 114: // 'r'
-                char = 'R';
-                break;
-            case 83: // 'S'
-            case 115: // 's'
-                char = 'S';
-                break;
-            case 84: // 'T'
-            case 116: // 't'
-                char = 'T';
-                break;
-            case 85: // 'U'
-            case 117: // 'u'
-                char = 'U';
-                break;
-            case 86: // 'V'
-            case 118: // 'v'
-                char = 'V';
-                break;
-            case 87: // 'W'
-            case 119: // 'w'
-                char = 'W';
-                break;
-            case 88: // 'X'
-            case 120: // 'x'
-                char = 'X';
-                break;
-            case 89: // 'Y'
-            case 121: // 'y'
-                char = 'Y';
-                break;
-            case 90: // 'Z'
-            case 122: // 'z'
-                char = 'Z';
-                break;
-            default:
-                char = '';
-        }
-
-    }
+    function Playletter(char) {
         if (char) {
-            // Stop speaking while
             if (currentUtterance) {
                 speechSynthesis.cancel();
             }
@@ -162,45 +42,55 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    //to dispay letter and senetnece
+    function handleKeyPress(e) {
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+            return;
+        }
+
+        const char = String.fromCharCode(e.keyCode).toUpperCase();
+        Playletter(char);
+    }
+
+    function handleMobileInput() {
+        const mobileCharInput = document.getElementById('mobileChar');
+        const char = mobileCharInput.value.toUpperCase();
+        if (char) {
+            Playletter(char);
+            mobileCharInput.value = ''; // Clear the input after processing
+        }
+    }
+
     function show(char, sentence) {
         const letterElement = document.getElementById('letter');
         letterElement.innerText = `${char}`;
-        letterElement.style.color = colors[char]; 
+        letterElement.style.color = colors[char];
         document.getElementById('sentenceshow').innerText = ` ${sentence}`;
     }
 
-//show video
     function showVideo(videoUrl) {
         const videoElement = document.getElementById('video');
         videoElement.src = videoUrl;
-        videoElement.autoplay = true; 
-        videoElement.muted = true; 
-        videoElement.loop = true; 
-        videoElement.controls = false; 
+        videoElement.autoplay = true;
+        videoElement.muted = true;
+        videoElement.loop = true;
+        videoElement.controls = false;
     }
-
-
-    //to speak
 
     function speakSentence(sentence) {
         const utterance = new SpeechSynthesisUtterance(sentence);
         speechSynthesis.speak(utterance);
-        currentUtterance = utterance; 
+        currentUtterance = utterance;
     }
 
-    // Save local storage
     function saveSentencesToStorage(sentences) {
         localStorage.setItem('alphabet_sentences', JSON.stringify(sentences));
     }
 
-    // Load from local storage
     function loadSentencesFromStorage() {
         const storedSentences = localStorage.getItem('alphabet_sentences');
         return storedSentences ? JSON.parse(storedSentences) : null;
     }
 
-    // Get default sentences if not stored
     function getDefaultSentences() {
         return {
             A: 'A for Apple',
@@ -263,23 +153,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         };
     }
 
-
-    // Function to handle form submission and update sentences
     const form = document.getElementById('sentenceForm');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const charInput = document.getElementById('char');
         const sentenceInput = document.getElementById('sentence');
-      
-        
+
         if (!charInput || !sentenceInput) {
             alert('Form elements are missing.');
             return;
         }
-    
+
         const char = charInput.value.toUpperCase();
         const sentence = sentenceInput.value.trim();
-    
+
         if (char && sentence) {
             sentences[char] = sentence;
             saveSentencesToStorage(sentences);
@@ -290,15 +177,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
             alert('Please fill out both fields.');
         }
     });
-    
 
-    //when key press 
-    document.addEventListener('keypress', Playletter);
-    document.addEventListener('touchstart', Playletter);
+    document.addEventListener('keypress', handleKeyPress);
 
-    // speak the sentence
+    const mobileCharInput = document.getElementById('mobileChar');
+    mobileCharInput.addEventListener('input', handleMobileInput);
+
     function speak(sentence) {
         speakSentence(sentence);
     }
 });
-
