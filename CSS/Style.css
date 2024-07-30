@@ -187,15 +187,27 @@ footer p :nth-child(2){
 
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Stack items vertically on smaller screens */
+        flex-direction: column;
+        height: 60vh;/* Stack items vertically on smaller screens */
+    }
+    .text-box {
+width: 100%;
+height: 20%;
     }
 
     .video-box {
-        max-width: 100%; /* Ensure video box takes full width on smaller screens */
+        max-width: 100%;
+        width: 100%;
+      padding: 0;
+height: 80%; /* Ensure video box takes full width on smaller screens */
+    }
+    .video-box video{
+        width: 100%;
+        
     }
 
     .letter-display {
-        font-size: 2rem; /* Adjust font size for smaller screens */
+        font-size: 4rem; /* Adjust font size for smaller screens */
     }
 
     header h1 {
