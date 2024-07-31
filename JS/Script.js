@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         letterElement.innerText = `${char}`;
         letterElement.style.color = colors[char];
         // document.getElementById('sentenceshow').innerText = `${sentence}`;
+      
         document.getElementById('sentenceshow').innerText = `${char} For ${sentence}`;
+        document.getElementById('sentenceshowsmall').style.display="none";
     }
 
     function showVideo(videoUrl) {
@@ -102,7 +104,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             E: 'Elephant',
             F: 'Fish',
             G: 'Goat',
-            H: 'Hat',
+            H: 'Hen',
             I: 'Icecream',
             J: 'Jug',
             K: 'Kite',

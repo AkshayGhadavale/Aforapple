@@ -64,6 +64,12 @@ body{
     font-style: normal;
 }
 
+#sentenceshowsmall{
+    display: none;
+}
+
+
+
 /* Styling for the video box */
 .video-box {
     max-width: 50%;
@@ -186,6 +192,20 @@ footer p :nth-child(2){
 
 
 @media (max-width: 768px) {
+
+    
+    #sentenceshowsmall{
+        padding-top: 10px;
+        display: block;
+        font-size: 1rem;
+        font-weight: 400;
+        font-style: normal;
+        color: red;
+    }
+    
+
+
+
     .container {
         flex-direction: column;
         height: 60vh;/* Stack items vertically on smaller screens */
